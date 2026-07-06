@@ -10,6 +10,3 @@
 [submodule "74"]
 	path = 74
 	url = git@github.com:Komaba-Festival-Committee/KF74-Visitor.git
-[submodule "73"]
-	path = 73
-	url = git@github.com:Komaba-Festival-Committee/KF73visitor.git

@@ -1,0 +1,33 @@
+name: Update Submodules to Latest
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token to access submodules
+        id: kf-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.KF_UPDATE_SUBMODULES_CLIENT_ID }}
+          private-key: ${{ secrets.KF_UPDATE_SUBMODULES_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - uses: actions/checkout@v7
+        with:
+          token: ${{ steps.kf-token.outputs.token }}
+          submodules: true
+
+      - name: Update submodules to latest, commit, and push to main branch
+        run: |
+          git config user.name "kf-visitor-update-submodules[bot]"
+          git config user.email "${{ secrets.KF_UPDATE_SUBMODULES_APP_ID }}+kf-visitor-update-submodules[bot]@users.noreply.github.com"
+
+          git submodule update --init --remote --force --filter=blob:none
+
+          git add .
+          git diff --cached --quiet && echo "Nothing changed" && exit 0
+          git commit -m "chore: automatically update submodules"
+          git push origin HEAD:main

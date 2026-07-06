@@ -1,0 +1,15 @@
+[submodule "77"]
+	path = 77
+	url = git@github.com:Komaba-Festival-Committee/kf77visitor.git
+[submodule "76"]
+	path = 76
+	url = git@github.com:Komaba-Festival-Committee/KF76visitor.git
+[submodule "75"]
+	path = 75
+	url = git@github.com:Komaba-Festival-Committee/KF75visitor.git
+[submodule "74"]
+	path = 74
+	url = git@github.com:Komaba-Festival-Committee/KF74-Visitor.git
+[submodule "73"]
+	path = 73
+	url = git@github.com:Komaba-Festival-Committee/KF73visitor.git

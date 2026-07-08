@@ -1,0 +1,74 @@
+name: Build and Deploy to QA
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get token to access submodules
+        id: kf-token
+        uses: actions/create-github-app-token@v3
+        with:
+          client-id: ${{ secrets.KF_CHECKOUT_SUBMODULES_CLIENT_ID }}
+          private-key: ${{ secrets.KF_CHECKOUT_SUBMODULES_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          submodules: recursive
+          token: ${{ steps.kf-token.outputs.token }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Enable corepack
+        run: |
+          corepack enable
+          corepack prepare yarn@4.6.0 --activate
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v5
+        with:
+          version: 10
+
+      - name: Install Spreet
+        run: cargo install spreet
+
+      - name: Build package
+        run: |
+          export NPM_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          bash build-qa.sh 
+          
+      - name: Upload built artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: build-qa-${{ github.sha }}
+          path: ./.output/dist
+          include-hidden-files: true
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: qa 
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: build-qa-${{ github.sha }}
+          path: ./dist
+
+      - name: Deploy to External QA System
+        run: |
+          echo "Deploying approved package to external system..."
+

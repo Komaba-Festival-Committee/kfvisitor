@@ -2,7 +2,7 @@ echo $(pwd)
 rm -rf .output
 mkdir -p .output/dist
 
-echo "/ /76/ 301" > .output/dist/_redirects || exit 1
+cp redirects .output/dist/_redirects || exit 1
 
 #bash -cx "cd 77;
 #rm -rf .nuxt .output node-modules;
@@ -33,6 +33,7 @@ cp -r 76mapapp/packages/map-style/dist/* .output/dist/76/map-style
 
 bash -cx "cd 75 &&
 rm -rf .nuxt .output node-modules &&
+yarn set version 4.6.0 &&
 yarn install --immutable &&
 export NUXT_PUBLIC_APP_MODE=production &&
 yarn generate;" || exit 1

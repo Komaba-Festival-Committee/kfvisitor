@@ -187,6 +187,7 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PREVIEW }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PREVIEW }}
           command: versions upload --env preview --preview-alias p-${{ steps.short-sha.outputs.sha }}
+          wranglerVersion: "4.107.0"
 
       - name: Comment PR with Version URL
         env:

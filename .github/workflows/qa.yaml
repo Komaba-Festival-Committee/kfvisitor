@@ -78,4 +78,5 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_QA }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_QA }}
           command: deploy --env qa
+          wranglerVersion: "4.107.0"
 

@@ -1,9 +1,9 @@
-name: Build and Deploy to QA
+name: Build and Deploy to Production
 
 on:
   push:
     branches:
-      - main
+      - production
 
 jobs:
   build:
@@ -44,19 +44,19 @@ jobs:
       - name: Build package
         run: |
           export NPM_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          bash build-qa.sh 
+          bash build-prod.sh 
           
       - name: Upload built artifact
         uses: actions/upload-artifact@v5
         with:
-          name: build-qa-${{ github.sha }}
+          name: build-prod-${{ github.sha }}
           path: ./.output/dist
           include-hidden-files: true
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    environment: qa 
+    environment: production
     
     steps:
       - name: Checkout code
@@ -65,17 +65,17 @@ jobs:
       - name: Download Build Artifact
         uses: actions/download-artifact@v5
         with:
-          name: build-qa-${{ github.sha }}
+          name: build-prod-${{ github.sha }}
           path: ./dist
 
-      - name: Deploy to External QA System
+      - name: Deploy to External PROD System
         run: |
           echo "Deploying approved package to external system..."
 
-      - name: Deploy to cloudflare QA
+      - name: Deploy to cloudflare PROD
         uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_QA }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_QA }}
-          command: deploy --env qa
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN_PROD }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID_PROD }}
+          command: deploy --env production
 

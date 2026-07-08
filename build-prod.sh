@@ -41,7 +41,6 @@ cp -r 75/.output/public .output/dist/75 || exit 1
 
 bash -cx "cd 74 &&
 rm -rf .nuxt .output node-modules &&
-yarn set version 4.0.0-rc.44 &&
 yarn install --immutable &&
 yarn generate;" || exit 1
 

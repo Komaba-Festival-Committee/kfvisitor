@@ -1,0 +1,53 @@
+# Base path: redirect to visitor 76
+/ /76/ 301
+
+# mail, committee, system
+/mail https://mail.komabasai.net 301
+/mail/* https://mail.komabasai.net/:splat 301
+/committee https://committee.komabasai.net 301
+/committee/* https://committee.komabasai.net/:splat 301
+/utokyo/committee https://committee.komabasai.net/utokyo 301
+/utokyo/committee/* https://committee.komabasai.net/utokyo/:splat 301
+/system https://system.komabasai.net 301
+/system/* https://system.komabasai.net/:splat 301
+
+# shinkan
+/77/shinkan https://shinkan.komabasai.net/77 301
+/77/shinkan/* https://shinkan.komabasai.net/77/:splat 301
+/76/shinkan https://shinkan.komabasai.net/76 301
+/76/shinkan/* https://shinkan.komabasai.net/76/:splat 301
+/75/shinkan https://shinkan.komabasai.net/75 301
+/75/shinkan/* https://shinkan.komabasai.net/75/:splat 301
+/74/shinkan https://shinkan.komabasai.net/74 301
+/74/shinkan/* https://shinkan.komabasai.net/74/:splat 301
+
+# old visitor urls
+/77/visitor /77 301
+/77/visitor/* /77/:splat 301
+/76/visitor /76 301
+/76/visitor/* /76/:splat 301
+/75/visitor /75 301
+/75/visitor/* /75/:splat 301
+/74/visitor /74 301
+/74/visitor/* /74/:splat 301
+
+# 3dmap
+/76/3dmap https://3dmap.komabasai.net/76 301
+/76/3dmap/* https://3dmap.komabasai.net/76/:splat 301
+/75/3dmap https://3dmap.komabasai.net/75 301
+/75/3dmap/* https://3dmap.komabasai.net/75/:splat 301
+
+# rally
+/76/rally https://rally.komabasai.net/76 301
+/76/rally/* https://rally.komabasai.net/76/:splat 301
+
+# presite
+/77/pre https://pre.komabasai.net/77 301
+/77/pre/* https://pre.komabasai.net/77/:splat 301
+/76/pre https://pre.komabasai.net/76 301
+/76/pre/* https://pre.komabasai.net/76/:splat 301
+
+# images
+/76/images https://images.komabasai.net/76 301
+/76/images/* https://images.komabasai.net/76/:splat 301
+

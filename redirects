@@ -47,7 +47,3 @@
 /76/pre https://pre.komabasai.net/76 301
 /76/pre/* https://pre.komabasai.net/76/:splat 301
 
-# images
-/76/images https://images.komabasai.net/76 301
-/76/images/* https://images.komabasai.net/76/:splat 301
-

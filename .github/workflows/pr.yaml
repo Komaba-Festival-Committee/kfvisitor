@@ -172,6 +172,9 @@ jobs:
           echo "Preview URL (to be populated): $PREVIEW_URL"
           echo "sha=${PR_SHA::7}" >> "$GITHUB_OUTPUT"
 
+      - name: Checkout code
+        uses: actions/checkout@v7
+
       - name: Download Build Artifact
         uses: actions/download-artifact@v5
         with:

@@ -1,5 +1,5 @@
-# Base path: redirect to visitor 76
-/ /76/ 301
+# Base path: redirect to 77 presite
+/ https://pre.komabasai.net/77/ 301
 
 # mail, committee, system
 /mail https://mail.komabasai.net 301
@@ -46,8 +46,4 @@
 /77/pre/* https://pre.komabasai.net/77/:splat 301
 /76/pre https://pre.komabasai.net/76 301
 /76/pre/* https://pre.komabasai.net/76/:splat 301
-
-# images
-/76/images https://images.komabasai.net/76 301
-/76/images/* https://images.komabasai.net/76/:splat 301
 

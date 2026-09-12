@@ -4,12 +4,12 @@ mkdir -p .output/dist
 
 cp redirects .output/dist/_redirects || exit 1
 
-#bash -cx "cd 77;
-#rm -rf .nuxt .output node-modules;
-#pnpm i;
-#pnpm exec nuxt generate;"
+bash -cx "cd 77 &&
+rm -rf .nuxt .output node-modules &&
+pnpm i &&
+pnpm generate" || exit 1
 
-#cp -r 77/.output/public .output/dist/77
+cp -r 77/dist/77 .output/dist/77 || exit 1
 
 # this is really horrible sedding the generated JS files but the map-app package is already generated with the hard url...
 bash -cx "cd 76 &&

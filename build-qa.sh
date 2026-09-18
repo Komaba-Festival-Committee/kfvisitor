@@ -11,6 +11,8 @@ pnpm generate" || exit 1
 
 cp -r 77/dist/77 .output/dist/77 || exit 1
 
+cp error/* .output/dist
+
 # this is really horrible sedding the generated JS files but the map-app package is already generated with the hard url...
 bash -cx "cd 76 &&
 rm -rf .nuxt .output node-modules &&

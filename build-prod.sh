@@ -11,6 +11,8 @@ cp redirects .output/dist/_redirects || exit 1
 
 #cp -r 77/.output/public .output/dist/77
 
+cp error/* .output/dist
+
 # this is really horrible sedding the generated JS files but the map-app package is already generated with the hard url...
 bash -cx "cd 76 &&
 rm -rf .nuxt .output node-modules &&

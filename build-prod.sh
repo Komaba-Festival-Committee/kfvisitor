@@ -2,14 +2,15 @@ echo $(pwd)
 rm -rf .output
 mkdir -p .output/dist
 
-cp redirects .output/dist/_redirects || exit 1
+cp -v redirects .output/dist/_redirects || exit 1
+cp -v sitemap.xml .output/dist/sitemap.xml || exit 1
 
-#bash -cx "cd 77;
-#rm -rf .nuxt .output node-modules;
-#pnpm i;
-#pnpm exec nuxt generate;"
+bash -cx "cd 77 &&
+rm -rf .nuxt .output node-modules &&
+pnpm i &&
+ENABLE_GOOGLE_ANALYTICS=true pnpm generate" || exit 1
 
-#cp -r 77/.output/public .output/dist/77
+cp -r 77/dist/77 .output/dist/77 || exit 1
 
 cp -v error/* .output/dist
 cp -v error/* .output/dist/77

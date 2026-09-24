@@ -1,0 +1,6 @@
+/:version/_nuxt/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/:version/_nuxt/builds/latest.json
+  ! Cache-Control
+  Cache-Control: no-cache

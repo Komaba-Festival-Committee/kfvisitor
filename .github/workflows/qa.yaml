@@ -44,7 +44,7 @@ jobs:
       - name: Build package
         run: |
           export NPM_TOKEN=${{ secrets.GITHUB_TOKEN }}
-          bash build-qa.sh 
+          bash build.sh qa
           
       - name: Upload built artifact
         uses: actions/upload-artifact@v5

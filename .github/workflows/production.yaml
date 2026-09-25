@@ -44,6 +44,10 @@ jobs:
       - name: Build package
         run: |
           export NPM_TOKEN=${{ secrets.GITHUB_TOKEN }}
+          export AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}
+          export AWS_DEFAULT_REGION=${{ secrets.AWS_DEFAULT_REGION }}
+          export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          export USE_REAL_AWS_DATA=true
           bash build.sh prod
           
       - name: Upload built artifact

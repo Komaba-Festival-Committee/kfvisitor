@@ -68,6 +68,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
+        with:
+          ref: production
 
       - name: Download Build Artifact
         uses: actions/download-artifact@v5

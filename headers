@@ -1,3 +1,6 @@
+/77/project-images/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /:version/_nuxt/*
   Cache-Control: public, max-age=31536000, immutable
 

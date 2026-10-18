@@ -1,14 +1,28 @@
+ENV="${1:-qa}"
+
+echo "Running build with environment: $ENV"
+
+if [ "$ENV" = "prod" ]; then
+    export ENABLE_GOOGLE_ANALYTICS=true
+else
+    unset ENABLE_GOOGLE_ANALYTICS
+fi
+
+echo "ENABLE_GOOGLE_ANALYTICS: ${ENABLE_GOOGLE_ANALYTICS:-unset}"
+
+
 echo $(pwd)
 rm -rf .output
 mkdir -p .output/dist
 
 cp -v redirects .output/dist/_redirects || exit 1
+cp -v headers .output/dist/_headers || exit 1
 cp -v sitemap.xml .output/dist/sitemap.xml || exit 1
 
 bash -cx "cd 77 &&
-rm -rf .nuxt .output node-modules &&
+rm -rf .nuxt .output &&
 pnpm i &&
-ENABLE_GOOGLE_ANALYTICS=true pnpm generate" || exit 1
+pnpm generate" || exit 1
 
 cp -r 77/dist/77 .output/dist/77 || exit 1
 
@@ -17,7 +31,7 @@ cp -v error/* .output/dist/77
 
 # this is really horrible sedding the generated JS files but the map-app package is already generated with the hard url...
 bash -cx "cd 76 &&
-rm -rf .nuxt .output node-modules &&
+rm -rf .nuxt .output &&
 yarn install --immutable &&
 sed 's|https://www.komabasai.net||' 'node_modules/@komaba-festival-committee/map-app/dist/map-app.es.js' | 
     sed 's|https://api.komabasai.net/76|/76/api|' > 'node_modules/@komaba-festival-committee/map-app/dist/map-app.es.js.tmp' &&
@@ -47,7 +61,7 @@ cp -r 76mapapp/packages/map-style/dist/* .output/dist/76/map-style
 " || exit 1
 
 bash -cx "cd 75 &&
-rm -rf .nuxt .output node-modules &&
+rm -rf .nuxt .output &&
 yarn set version 4.6.0 &&
 yarn install --immutable &&
 export NUXT_PUBLIC_APP_MODE=production &&
@@ -56,7 +70,7 @@ yarn generate;" || exit 1
 cp -r 75/.output/public .output/dist/75 || exit 1
 
 bash -cx "cd 74 &&
-rm -rf .nuxt .output node-modules &&
+rm -rf .nuxt .output &&
 yarn set version 4.0.0-rc.44 &&
 yarn install --immutable &&
 yarn generate;" || exit 1

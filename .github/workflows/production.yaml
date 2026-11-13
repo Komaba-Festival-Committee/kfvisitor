@@ -10,6 +10,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
     steps:
       - name: Get token to access submodules
         id: kf-token
@@ -25,6 +28,9 @@ jobs:
           submodules: recursive
           token: ${{ steps.kf-token.outputs.token }}
           ref: production
+
+      - name: Authenticate to GitHub Packages
+        run: echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" >> ~/77/.npmrc
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

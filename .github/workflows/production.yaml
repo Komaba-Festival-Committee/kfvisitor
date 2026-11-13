@@ -29,12 +29,10 @@ jobs:
           token: ${{ steps.kf-token.outputs.token }}
           ref: production
 
-      - name: Authenticate to github packages
-        working-directory: ./77
+      - name: Configure GitHub Packages
         run: |
-          echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> .npmrc
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo '@komaba-festival-committee:registry=https://npm.pkg.github.com' >> ~/.npmrc
+          echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> ~/.npmrc
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

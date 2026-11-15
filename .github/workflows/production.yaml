@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      packages: read
     steps:
       - name: Get token to access submodules
         id: kf-token
@@ -28,11 +27,6 @@ jobs:
           submodules: recursive
           token: ${{ steps.kf-token.outputs.token }}
           ref: production
-
-      - name: Configure GitHub Packages
-        run: |
-          echo '@komaba-festival-committee:registry=https://npm.pkg.github.com' >> ~/.npmrc
-          echo '//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}' >> ~/.npmrc
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -60,8 +54,6 @@ jobs:
           export AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}
           export USE_REAL_AWS_DATA=true
           bash build.sh prod
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Upload built artifact
         uses: actions/upload-artifact@v5
